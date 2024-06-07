@@ -1,39 +1,30 @@
 package projekt.m223.projektM223.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import projekt.m223.projektM223.model.ReservationModel;
 import org.springframework.stereotype.Service;
+import projekt.m223.projektM223.repository.ReservationRepository;
 
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
+
 
 @Service
 public class ReservationService {
 
-    private final List<ReservationModel> reservations = new CopyOnWriteArrayList<>();
-
-    public ReservationModel saveReservation(ReservationModel reservation) {
-        reservations.add(reservation);
-        return reservation;
-    }
+    @Autowired
+    private ReservationRepository reservationRepository;
 
     public ReservationModel findByPublicCode(String publicCode) {
-        for (ReservationModel reservation : reservations) {
-            if (reservation.getPublicCode().equals(publicCode)) {
-                return reservation;
-            }
-        }
-        return null;
+        return reservationRepository.findByPublicCode(publicCode);
     }
 
     public ReservationModel findByPrivateCode(String privateCode) {
-        for (ReservationModel reservation : reservations) {
-            if (reservation.getPrivateCode().equals(privateCode)) {
-                return reservation;
-            }
-        }
-        return null;
+        return reservationRepository.findByPrivateCode(privateCode);
     }
 
-    // Add methods for other functionalities as needed
-    // (e.g., update reservation, cancel reservation)
+    public ReservationModel saveReservation(ReservationModel reservation) {
+        return reservationRepository.save(reservation);
+    }
+
 }
+

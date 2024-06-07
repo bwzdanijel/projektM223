@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Reservation</title>
+    <link rel="stylesheet" href="styles/create_reservation_page.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -128,13 +129,7 @@
                 <label for="memberList">Member List:</label>
             </td>
             <td>
-                <select id="memberList" multiple>
-                    <option value="Cyril" th:field="*{memberList}">Cyril</option>
-                    <option value="Danijel" th:field="*{memberList}">Danijel</option>
-                    <option value="David R." th:field="*{memberList}">David R.</option>
-                    <option value="David T." th:field="*{memberList}">David T.</option>
-                    <option value="Dominic" th:field="*{memberList}">Dominic</option>
-                </select>
+                <textarea id="memberList" th:field="*{memberList}"></textarea>
             </td>
         </tr>
         </tbody>

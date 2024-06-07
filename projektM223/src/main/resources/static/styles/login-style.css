@@ -29,7 +29,6 @@ form {
     text-align: right; /* Text rechtsbündig ausrichten */
 }
 
-
 .input-group input[type="text"] {
     padding: 10px;
     border: 2px solid #fff;
@@ -56,9 +55,7 @@ form {
     background-color: #45a049;
 }
 
-
-
-    /* Last Button */
+/* Last Button */
 
 .button-group.continue {
     display: flex;
@@ -66,7 +63,7 @@ form {
     margin-top: 20px;
 }
 
-.button-group.continue button[type="button"] {
+.button-group.continue button[type="submit"] {
     padding: 15px 30px;
     font-size: 1.2em;
     background-color: #ff9800;
@@ -77,6 +74,6 @@ form {
     transition: background-color 0.3s;
 }
 
-.button-group.continue button[type="button"]:hover {
+.button-group.continue button[type="submit"]:hover {
     background-color: #f57c00;
 }
