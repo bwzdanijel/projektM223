@@ -1,36 +1,23 @@
 package projekt.m223.projektM223.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.util.Base64;
 
-
-@Document(collection = "keys")
 public class GenerateKeys {
-    @Id
-    private String privatKey;
-    private String publicKey;
 
-    public GenerateKeys() {
+    public static KeyPair generateKeyPair() {
+        try {
+            KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+            keyPairGenerator.initialize(2048);
+            return keyPairGenerator.generateKeyPair();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
-    public GenerateKeys(String privatKey, String publicKey) {
-        this.privatKey = privatKey;
-        this.publicKey = publicKey;
-    }
-
-    public String getPrivatKey() {
-        return privatKey;
-    }
-
-    public void setPrivatKey(String privatKey) {
-        this.privatKey = privatKey;
-    }
-
-    public String getPublicKey() {
-        return publicKey;
-    }
-
-    public void setPublicKey(String publicKey) {
-        this.publicKey = publicKey;
+    public static String encodeKey(byte[] key) {
+        return Base64.getEncoder().encodeToString(key);
     }
 }
