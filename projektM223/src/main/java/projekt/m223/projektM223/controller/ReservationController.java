@@ -40,6 +40,16 @@ public class ReservationController {
 
 
 
+    /*@GetMapping("/byPublicKey")
+    public String getReservationByPublicKey(@RequestParam("publicCode") String publicCode) {
+        ReservationModel reservation = reservationService.findByPublicCode(publicCode);
+        if (reservation != null) {
+            return "show_reservation_detail";
+        } else {
+            return "Fehler********";
+        }
+    }*/
+
     @PostMapping("/byPublicKey")
     public String getReservationByPublicKey(@RequestParam("publicCode") String publicCode) {
         ReservationModel reservation = reservationService.findByPublicCode(publicCode);
@@ -51,22 +61,7 @@ public class ReservationController {
     }
 
 
-    @GetMapping("/byPublicKey")
-    public String getReservationByPublicKey(@RequestParam("publicCode") String publicCode, Model model) {
-        ReservationModel reservation = reservationService.findByPublicCode(publicCode);
-        if (reservation != null) {
-            model.addAttribute("reservation", reservation);
 
-            // Datum formatieren
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            String formattedDate = formatter.format(reservation.getDate());
-            model.addAttribute("formattedDate", formattedDate);
-
-            return "show_reservation_detail";
-        } else {
-            return "error"; // Fehlerbehandlung für nicht gefundene Reservierung
-        }
-    }
 
 
 
