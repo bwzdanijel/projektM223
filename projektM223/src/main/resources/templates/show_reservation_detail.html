@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservation Details</title>
+    <link rel="stylesheet" href="styles/login-style.css">
+</head>
+<body>
+<div class="container">
+</div>
+
+<div class="reservation-details">
+    <h2>Reservation Details</h2>
+    <p>Reservation Code: {{ reservation.publicCode }}</p>
+    <p>Date: {{ reservation.date }}</p>
+    <p>From: {{ reservation.from }}</p>
+    <p>To: {{ reservation.to }}</p>
+    <p>Room: {{ reservation.room }}</p>
+    <p>Comment: {{ reservation.comment }}</p>
+    <p>Member List: {{ reservation.memberList }}</p>
+</div>
+
+</body>
+</html>

@@ -7,29 +7,24 @@
 </head>
 <body>
 <div class="container">
-
-
-  <form method="post" action="../templates/create_reservation_page.html">
-
+  <form method="post" action="/reservations/byPublicKey">
     <div class="input-group public">
       <label for="public-input">Enter Public Key</label>
-      <input type="text" id="public-input">
-      <button type="button">Submit</button>
+      <input type="text" id="public-input" name="publicCode" required>
+      <button type="submit">Submit</button>
     </div>
-
-    <div class="input-group private">
-      <label for="private-input">Enter Private Key</label>
-      <input type="text" id="private-input" >
-      <button type="button">Submit</button>
-    </div>
-
-    <form method="get" action="../templates/create_reservation_page.html">
-      <div class="button-group continue">
-        <button type="submit">Continue without Key</button>
-      </div>
-    </form>
   </form>
+  <div class="input-group private">
+    <label for="private-input">Enter Private Key</label>
+    <input type="text" id="private-input" required="false">
+    <button type="button">Submit</button>
+  </div>
 
+  <form method="get" action="/reservations/create">
+    <div class="button-group continue">
+      <button type="submit">Continue without Key</button>
+    </div>
+  </form>
 </div>
 </body>
 </html>
