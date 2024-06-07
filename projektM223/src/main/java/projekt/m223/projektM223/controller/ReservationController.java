@@ -1,18 +1,16 @@
 package projekt.m223.projektM223.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import projekt.m223.projektM223.model.ReservationModel;
 import projekt.m223.projektM223.service.ReservationService; // Import reservation service
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+
 @Controller
 @RequestMapping("/reservations")
 @RequiredArgsConstructor
@@ -21,23 +19,70 @@ public class ReservationController {
     @Autowired
     private ReservationService reservationService;
 
-    public static final String RESERVATION_FORM = "reservationForm";
-
     @GetMapping("/create")
     public String getCreateReservationPage(Model model) {
         model.addAttribute("newReservation", new ReservationModel());
         return "create_reservation_page";
     }
 
-    @GetMapping("/{publicCode}")
-    public String showReservationByPublicCode(@PathVariable String publicCode, Model model) {
-        ReservationModel reservation = reservationService.findByPublicCode(publicCode);
-        if (reservation == null) {
-            return "error_page"; // Handle invalid public code
-        }
-        model.addAttribute("reservation", reservation);
+    @PostMapping("/create")
+    public String createReservation(@ModelAttribute ReservationModel reservation, Model model) {
+        String publicCode = generateRandomCode(20);
+        String privateCode = generateRandomCode(20);
+        reservation.setPublicCode(publicCode);
+        reservation.setPrivateCode(privateCode);
+        ReservationModel savedReservation = reservationService.saveReservation(reservation);
+        model.addAttribute("reservation", savedReservation);
+        model.addAttribute("publicCode", publicCode);
+        model.addAttribute("privateCode", privateCode);
         return "reservation_details";
     }
+
+
+
+    @PostMapping("/byPublicKey")
+    public String getReservationByPublicKey(@RequestParam("publicCode") String publicCode) {
+        ReservationModel reservation = reservationService.findByPublicCode(publicCode);
+        if (reservation != null) {
+            return "show_reservation_detail";
+        } else {
+            return "error"; // Handle not found scenario
+        }
+    }
+
+
+    @GetMapping("/byPublicKey")
+    public String getReservationByPublicKey(@RequestParam("publicCode") String publicCode, Model model) {
+        ReservationModel reservation = reservationService.findByPublicCode(publicCode);
+        if (reservation != null) {
+            model.addAttribute("reservation", reservation);
+
+            // Datum formatieren
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            String formattedDate = formatter.format(reservation.getDate());
+            model.addAttribute("formattedDate", formattedDate);
+
+            return "show_reservation_detail";
+        } else {
+            return "error"; // Fehlerbehandlung für nicht gefundene Reservierung
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @GetMapping("/{privateCode}/edit")
     public String editReservationByPrivateCode(@PathVariable String privateCode, Model model) {
@@ -49,18 +94,7 @@ public class ReservationController {
         return "edit_reservation_page";
     }
 
-    @PostMapping("/create")
-    public String createReservation(@ModelAttribute ReservationModel reservation, Model model) {
-        ReservationModel savedReservation = reservationService.saveReservation(reservation);
-        String publicCode = generateRandomCode(20);
-        String privateCode = generateRandomCode(20);
-        savedReservation.setPublicCode(publicCode);
-        savedReservation.setPrivateCode(privateCode);
-        model.addAttribute("reservation", savedReservation);
-        model.addAttribute("publicCode", publicCode);
-        model.addAttribute("privateCode", privateCode);
-        return "reservation_details";
-    }
+
 
     @PostMapping("/update/{privateCode}")
     public String updateReservation(@PathVariable String privateCode, @ModelAttribute ReservationModel reservation, Model model) {
@@ -75,6 +109,7 @@ public class ReservationController {
         existingReservation.setComment(reservation.getComment());
         existingReservation.setMemberList(reservation.getMemberList());
         // Don't update public or private codes for security reasons
+        reservationService.saveReservation(existingReservation);
         model.addAttribute("reservation", existingReservation);
         return "reservation_details"; // Redirect back to reservation details page
     }
