@@ -3,10 +3,13 @@ package projekt.m223.projektM223.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.lang.annotation.Documented;
 import java.util.Date;
 
 @Data
