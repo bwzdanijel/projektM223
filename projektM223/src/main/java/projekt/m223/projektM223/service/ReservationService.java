@@ -34,6 +34,4 @@ public class ReservationService {
         return null;
     }
 
-    // Add methods for other functionalities as needed
-    // (e.g., update reservation, cancel reservation)
 }
