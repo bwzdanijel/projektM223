@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservation Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            box-sizing: border-box;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        .label {
+            font-weight: bold;
+            font-size: 16px;
+            color: #555;
+        }
+        td {
+            font-size: 14px;
+        }
+        .greenCode {
+            color: green;
+        }
+        .redCode {
+            color: red;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #4CAF50;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: 1px solid #4CAF50;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        a:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Reservation Details</h1>
+    <table>
+        <tbody>
+        <tr>
+            <td class="label">Date:</td>
+            <td>[[${reservation.date}]]</td>
+        </tr>
+        <tr>
+            <td class="label">From:</td>
+            <td>[[${reservation.from}]]</td>
+        </tr>
+        <tr>
+            <td class="label">To:</td>
+            <td>[[${reservation.to}]]</td>
+        </tr>
+        <tr>
+            <td class="label">Room:</td>
+            <td>[[${reservation.room}]]</td>
+        </tr>
+        <tr>
+            <td class="label">Comment:</td>
+            <td>[[${reservation.comment}]]</td>
+        </tr>
+        <tr>
+            <td class="label">Member List:</td>
+            <td>[[${reservation.memberList}]]</td>
+        </tr>
+        <tr>
+            <td class="label">Public Code:</td>
+            <td class="greenCode">[[${reservation.publicCode}]]</td>
+        </tr>
+        <tr>
+            <td class="label">Private Code:</td>
+            <td class="redCode">[[${privateCode}]]</td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/">Back to Main Page</a>
+</div>
+</body>
+</html>
