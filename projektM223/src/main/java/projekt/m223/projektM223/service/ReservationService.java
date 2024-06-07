@@ -5,8 +5,6 @@ import projekt.m223.projektM223.model.ReservationModel;
 import org.springframework.stereotype.Service;
 import projekt.m223.projektM223.repository.ReservationRepository;
 
-import java.util.List;
-
 
 @Service
 public class ReservationService {
@@ -18,7 +16,7 @@ public class ReservationService {
         return reservationRepository.findByPublicCode(publicCode);
     }
 
-    public ReservationModel findByPrivateCode(String privateCode) {
+        public ReservationModel findByPrivateCode(String privateCode) {
         return reservationRepository.findByPrivateCode(privateCode);
     }
 
