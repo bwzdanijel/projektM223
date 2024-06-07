@@ -9,23 +9,25 @@
 <div class="container">
 
 
-  <form method="post" action="/login">
+  <form method="post" action="../templates/create_reservation_page.html">
 
     <div class="input-group public">
       <label for="public-input">Enter Public Key</label>
-      <input type="text" id="public-input" required="false">
+      <input type="text" id="public-input">
       <button type="button">Submit</button>
     </div>
 
     <div class="input-group private">
       <label for="private-input">Enter Private Key</label>
-      <input type="text" id="private-input" required="false">
+      <input type="text" id="private-input" >
       <button type="button">Submit</button>
     </div>
 
-    <div class="button-group continue">
-      <button type="button">Continue without Key</button>
-    </div>
+    <form method="get" action="../templates/create_reservation_page.html">
+      <div class="button-group continue">
+        <button type="submit">Continue without Key</button>
+      </div>
+    </form>
   </form>
 
 </div>
