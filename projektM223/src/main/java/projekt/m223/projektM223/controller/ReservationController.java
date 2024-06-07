@@ -18,7 +18,7 @@ public class ReservationController {
     @Autowired
     private ReservationService reservationService;
 
-    @GetMapping("/")
+    @GetMapping("/start.html")
     public String startPage() {
         return "start";
     }
