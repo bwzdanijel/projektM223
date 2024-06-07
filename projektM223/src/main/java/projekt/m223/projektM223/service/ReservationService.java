@@ -1,40 +1,39 @@
 package projekt.m223.projektM223.service;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
+import projekt.m223.projektM223.model.ReservationModel;
 import org.springframework.stereotype.Service;
-import projekt.m223.projektM223.model.GenerateKeys;
-import projekt.m223.projektM223.model.Reservation;
-import projekt.m223.projektM223.repository.ReservationRepository;
 
-import java.security.KeyPair;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service
 public class ReservationService {
 
-    @Autowired
-    private ReservationRepository reservationRepository;
+    private final List<ReservationModel> reservations = new CopyOnWriteArrayList<>();
 
-    public Reservation createReservation(Reservation reservation) {
-        KeyPair keyPair = GenerateKeys.generateKeyPair();
-        String publicKey = GenerateKeys.encodeKey(keyPair.getPublic().getEncoded());
-        String privateKey = GenerateKeys.encodeKey(keyPair.getPrivate().getEncoded());
-        reservation.setPublicKey(publicKey);
-        reservation.setPrivateKey(privateKey);
-        return reservationRepository.save(reservation);
+    public ReservationModel saveReservation(ReservationModel reservation) {
+        reservations.add(reservation);
+        return reservation;
     }
 
-    public Reservation getReservationByPublicKey(String publicKey) {
-        return reservationRepository.findByPublicKey(publicKey);
-    }
-
-    public Reservation getReservationByPrivateKey(String privateKey) {
-        return reservationRepository.findByPrivateKey(privateKey);
-    }
-
-    public Reservation updateReservationByPrivateKey(String privateKey, Reservation newReservationData) {
-        Reservation reservation = reservationRepository.findByPrivateKey(privateKey);
-
+    public ReservationModel findByPublicCode(String publicCode) {
+        for (ReservationModel reservation : reservations) {
+            if (reservation.getPublicCode().equals(publicCode)) {
+                return reservation;
+            }
+        }
         return null;
     }
+
+    public ReservationModel findByPrivateCode(String privateCode) {
+        for (ReservationModel reservation : reservations) {
+            if (reservation.getPrivateCode().equals(privateCode)) {
+                return reservation;
+            }
+        }
+        return null;
+    }
+
+    // Add methods for other functionalities as needed
+    // (e.g., update reservation, cancel reservation)
 }
