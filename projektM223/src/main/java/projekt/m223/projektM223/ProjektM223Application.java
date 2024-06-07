@@ -9,5 +9,4 @@ public class ProjektM223Application {
 	public static void main(String[] args) {
 		SpringApplication.run(ProjektM223Application.class, args);
 	}
-
 }
