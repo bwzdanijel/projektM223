@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+
+
 @Controller
 @RequestMapping("/reservations")
 @RequiredArgsConstructor
@@ -67,21 +69,6 @@ public class ReservationController {
             return "error"; // Fehlerbehandlung für nicht gefundene Reservierung
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     @GetMapping("/{privateCode}/edit")

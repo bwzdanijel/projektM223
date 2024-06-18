@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Reservation Details</title>
@@ -11,13 +11,13 @@
 
 <div class="reservation-details">
     <h2>Reservation Details</h2>
-    <p>Reservation Code: {{ reservation.publicCode }}</p>
-    <p>Date: {{ reservation.date }}</p>
-    <p>From: {{ reservation.from }}</p>
-    <p>To: {{ reservation.to }}</p>
-    <p>Room: {{ reservation.room }}</p>
-    <p>Comment: {{ reservation.comment }}</p>
-    <p>Member List: {{ reservation.memberList }}</p>
+    <p>Reservation Code: <span th:text="${reservation.publicCode}"></span></p>
+    <p>Date: <span th:text="${formattedDate}"></span></p>
+    <p>From: <span th:text="${reservation.from}"></span></p>
+    <p>To: <span th:text="${reservation.to}"></span></p>
+    <p>Room: <span th:text="${reservation.room}"></span></p>
+    <p>Comment: <span th:text="${reservation.comment}"></span></p>
+    <p>Member List: <span th:text="${reservation.memberList}"></span></p>
 </div>
 
 </body>

@@ -1,3 +1,5 @@
+
+<!--
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -100,3 +102,150 @@
 <a href="/reservations/{privateCode}">Back to Details</a>
 </body>
 </html>
+
+-->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Reservation</title>
+    <link rel="stylesheet" href="styles/create_reservation_page.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            box-sizing: border-box;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        td:first-child {
+            width: 25%;
+            vertical-align: top;
+        }
+        input[type="text"],
+        input[type="date"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<form th:object="${newReservation}" method="post" action="/reservations/create">
+    <h1>Create Reservation</h1>
+    <table>
+        <tbody>
+        <tr>
+            <td>
+                <label for="date">Date:</label>
+            </td>
+            <td>
+                <input type="date" id="date" th:field="*{date}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="from">From:</label>
+            </td>
+            <td>
+                <input type="text" id="from" th:field="*{from}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="to">To:</label>
+            </td>
+            <td>
+                <input type="text" id="to" th:field="*{to}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="room">Room:</label>
+            </td>
+            <td>
+                <select id="room">
+                    <option value="101" th:field="*{room}">101</option>
+                    <option value="102" th:field="*{room}">102</option>
+                    <option value="103" th:field="*{room}">103</option>
+                    <option value="111" th:field="*{room}">111</option>
+                    <option value="112" th:field="*{room}">112</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="comment">Comment:</label>
+            </td>
+            <td>
+                <textarea id="comment" th:field="*{comment}"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="memberList">Member List:</label>
+            </td>
+            <td>
+                <textarea id="memberList" th:field="*{memberList}"></textarea>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <button type="submit">Create Reservation</button>
+</form>
+</body>
+</html>
+
+
