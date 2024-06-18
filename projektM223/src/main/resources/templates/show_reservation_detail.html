@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Reservation Details</title>
@@ -7,18 +7,19 @@
 </head>
 <body>
 <div class="container">
+    <div class="reservation-details" th:if="${reservation != null}">
+        <h2>Reservation Details</h2>
+        <p>Reservation Code: <span th:text="${reservation.publicCode}"></span></p>
+        <p>Date: <span th:text="${#dates.format(reservation.date, 'yyyy-MM-dd')}"></span></p>
+        <p>From: <span th:text="${reservation.from}"></span></p>
+        <p>To: <span th:text="${reservation.to}"></span></p>
+        <p>Room: <span th:text="${reservation.room}"></span></p>
+        <p>Comment: <span th:text="${reservation.comment}"></span></p>
+        <p>Member List: <span th:text="${reservation.memberList}"></span></p>
+    </div>
+    <div th:if="${reservation == null}">
+        <p>Reservation not found.</p>
+    </div>
 </div>
-
-<div class="reservation-details">
-    <h2>Reservation Details</h2>
-    <p>Reservation Code: <span th:text="${reservation.publicCode}"></span></p>
-    <p>Date: <span th:text="${formattedDate}"></span></p>
-    <p>From: <span th:text="${reservation.from}"></span></p>
-    <p>To: <span th:text="${reservation.to}"></span></p>
-    <p>Room: <span th:text="${reservation.room}"></span></p>
-    <p>Comment: <span th:text="${reservation.comment}"></span></p>
-    <p>Member List: <span th:text="${reservation.memberList}"></span></p>
-</div>
-
 </body>
 </html>

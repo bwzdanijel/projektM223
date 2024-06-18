@@ -8,8 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
-import java.text.SimpleDateFormat;
-import java.util.List;
 
 
 
@@ -41,46 +39,16 @@ public class ReservationController {
     }
 
 
-
     @PostMapping("/byPublicKey")
-    public String getReservationByPublicKey(@RequestParam("publicCode") String publicCode) {
+    public String getReservationByPublicKey(@RequestParam("publicCode") String publicCode, Model model) {
         ReservationModel reservation = reservationService.findByPublicCode(publicCode);
         if (reservation != null) {
+            model.addAttribute("reservation", reservation);
             return "show_reservation_detail";
         } else {
             return "error"; // Handle not found scenario
         }
     }
-
-
-    @GetMapping("/byPublicKey")
-    public String getReservationByPublicKey(@RequestParam("publicCode") String publicCode, Model model) {
-        ReservationModel reservation = reservationService.findByPublicCode(publicCode);
-        if (reservation != null) {
-            model.addAttribute("reservation", reservation);
-
-            // Datum formatieren
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            String formattedDate = formatter.format(reservation.getDate());
-            model.addAttribute("formattedDate", formattedDate);
-
-            return "show_reservation_detail";
-        } else {
-            return "error"; // Fehlerbehandlung für nicht gefundene Reservierung
-        }
-    }
-
-
-    @GetMapping("/{privateCode}/edit")
-    public String editReservationByPrivateCode(@PathVariable String privateCode, Model model) {
-        ReservationModel reservation = reservationService.findByPrivateCode(privateCode);
-        if (reservation == null) {
-            return "error_page"; // Handle invalid private code
-        }
-        model.addAttribute("reservation", reservation);
-        return "edit_reservation_page";
-    }
-
 
 
     @PostMapping("/update/{privateCode}")
@@ -100,6 +68,21 @@ public class ReservationController {
         model.addAttribute("reservation", existingReservation);
         return "reservation_details"; // Redirect back to reservation details page
     }
+
+
+    @GetMapping("/{privateCode}/edit")
+    public String editReservationByPrivateCode(@PathVariable String privateCode, Model model) {
+        ReservationModel reservation = reservationService.findByPrivateCode(privateCode);
+        if (reservation == null) {
+            return "error_page"; // Handle invalid private code
+        }
+        model.addAttribute("reservation", reservation);
+        return "edit_reservation_page";
+    }
+
+
+
+
 
     private String generateRandomCode(int length) {
         StringBuilder sb = new StringBuilder();
