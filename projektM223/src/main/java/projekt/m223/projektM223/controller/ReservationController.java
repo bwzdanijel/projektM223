@@ -40,7 +40,7 @@ public class ReservationController {
             model.addAttribute("reservation", reservation);
             return "show_reservation_detail";
         } else {
-            return "error"; // Handle not found scenario
+            return "error_page"; // Handle not found scenario
         }
     }
 
@@ -51,7 +51,7 @@ public class ReservationController {
             model.addAttribute("reservation", reservation);
             return "edit_reservation_page";
         } else {
-            return "error";
+            return "error_page";
         }
     }
 
@@ -62,7 +62,7 @@ public class ReservationController {
             model.addAttribute("reservation", reservation);
             return "edit_reservation_page";
         } else {
-            return "error";
+            return "error_page";
         }
     }
 
@@ -73,7 +73,19 @@ public class ReservationController {
             model.addAttribute("reservation", updatedReservation);
             return "show_reservation_detail";
         } else {
-            return "error";
+            return "error_page";
+        }
+    }
+
+
+    @GetMapping("/delete/{privateCode}")
+    public String deleteReservation(@PathVariable("privateCode") String privateCode) {
+        ReservationModel reservation = reservationService.findByPrivateCode(privateCode);
+        if (reservation != null) {
+            reservationService.deleteReservation(reservation);
+            return "deleted_reservation_page";
+        } else {
+            return "error_page";
         }
     }
 
