@@ -37,5 +37,9 @@ public class ReservationService {
         }
         return null;
     }
+
+    public void deleteReservation(ReservationModel reservation) {
+        reservationRepository.delete(reservation);
+    }
 }
 
