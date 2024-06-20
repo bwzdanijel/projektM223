@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Welcome</title>
   <link rel="stylesheet" href="styles/login-style.css">
+  <link rel="stylesheet" href="styles/custom-buttons.css">
 </head>
 <body>
 <div class="container">
@@ -11,22 +12,19 @@
     <div class="input-group public">
       <label for="public-input">Enter Public Key</label>
       <input type="text" id="public-input" name="publicCode" required>
-      <button type="submit">Submit</button>
+      <button type="submit" class="submit-button">Submit</button>
     </div>
   </form>
-
   <form method="post" action="/reservations/byPrivateKey">
     <div class="input-group private">
       <label for="private-input">Enter Private Key</label>
-      <input type="text" id="private-input" name="privateCode" required="false">
-      <button type="submit">Submit</button>
+      <input type="text" id="private-input" name="privateCode" required>
+      <button type="submit" class="submit-button">Submit</button>
     </div>
   </form>
-
-
   <form method="get" action="/reservations/create">
     <div class="button-group continue">
-      <button type="submit">Continue without Key</button>
+      <button type="submit" class="submit-button">Continue without Key</button>
     </div>
   </form>
 </div>
