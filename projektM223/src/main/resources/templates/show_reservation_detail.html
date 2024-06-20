@@ -3,19 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>Reservation Details</title>
-    <link rel="stylesheet" href="styles/login-style.css">
+    <link rel="stylesheet" href="/styles/reservation_details.css"></head>
 </head>
 <body>
 <div class="container">
     <div class="reservation-details" th:if="${reservation != null}">
         <h2>Reservation Details</h2>
-        <p>Reservation Code: <span th:text="${reservation.publicCode}"></span></p>
-        <p>Date: <span th:text="${#dates.format(reservation.date, 'yyyy-MM-dd')}"></span></p>
-        <p>From: <span th:text="${reservation.from}"></span></p>
-        <p>To: <span th:text="${reservation.to}"></span></p>
-        <p>Room: <span th:text="${reservation.room}"></span></p>
-        <p>Comment: <span th:text="${reservation.comment}"></span></p>
-        <p>Member List: <span th:text="${reservation.memberList}"></span></p>
+        <table>
+            <tr>
+                <th>Reservation Code</th>
+                <td><span th:text="${reservation.publicCode}"></span></td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td><span th:text="${#dates.format(reservation.date, 'yyyy-MM-dd')}"></span></td>
+            </tr>
+            <tr>
+                <th>From</th>
+                <td><span th:text="${reservation.from}"></span></td>
+            </tr>
+            <tr>
+                <th>To</th>
+                <td><span th:text="${reservation.to}"></span></td>
+            </tr>
+            <tr>
+                <th>Room</th>
+                <td><span th:text="${reservation.room}"></span></td>
+            </tr>
+            <tr>
+                <th>Comment</th>
+                <td><span th:text="${reservation.comment}"></span></td>
+            </tr>
+            <tr>
+                <th>Member List</th>
+                <td><span th:text="${reservation.memberList}"></span></td>
+            </tr>
+        </table>
     </div>
     <div th:if="${reservation == null}">
         <p>Reservation not found.</p>
