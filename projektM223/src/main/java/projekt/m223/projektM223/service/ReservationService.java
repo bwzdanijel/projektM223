@@ -16,7 +16,7 @@ public class ReservationService {
         return reservationRepository.findByPublicCode(publicCode);
     }
 
-        public ReservationModel findByPrivateCode(String privateCode) {
+    public ReservationModel findByPrivateCode(String privateCode) {
         return reservationRepository.findByPrivateCode(privateCode);
     }
 
@@ -24,5 +24,18 @@ public class ReservationService {
         return reservationRepository.save(reservation);
     }
 
+    public ReservationModel updateReservationByPrivateCode(String privateCode, ReservationModel reservationDetails) {
+        ReservationModel reservation = reservationRepository.findByPrivateCode(privateCode);
+        if (reservation != null) {
+            reservation.setDate(reservationDetails.getDate());
+            reservation.setFrom(reservationDetails.getFrom());
+            reservation.setTo(reservationDetails.getTo());
+            reservation.setRoom(reservationDetails.getRoom());
+            reservation.setComment(reservationDetails.getComment());
+            reservation.setMemberList(reservationDetails.getMemberList());
+            return reservationRepository.save(reservation);
+        }
+        return null;
+    }
 }
 

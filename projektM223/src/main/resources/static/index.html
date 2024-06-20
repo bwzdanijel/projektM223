@@ -14,11 +14,15 @@
       <button type="submit">Submit</button>
     </div>
   </form>
-  <div class="input-group private">
-    <label for="private-input">Enter Private Key</label>
-    <input type="text" id="private-input" required="false">
-    <button type="button">Submit</button>
-  </div>
+
+  <form method="post" action="/reservations/byPrivateKey">
+    <div class="input-group private">
+      <label for="private-input">Enter Private Key</label>
+      <input type="text" id="private-input" name="privateCode" required="false">
+      <button type="submit">Submit</button>
+    </div>
+  </form>
+
 
   <form method="get" action="/reservations/create">
     <div class="button-group continue">
