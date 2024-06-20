@@ -40,7 +40,7 @@ public class ReservationController {
             model.addAttribute("reservation", reservation);
             return "show_reservation_detail";
         } else {
-            return "error_page"; // Handle not found scenario
+            return "error_page";
         }
     }
 
