@@ -1,17 +1,14 @@
 package projekt.m223.projektM223.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import projekt.m223.projektM223.model.ReservationModel;
-import projekt.m223.projektM223.service.ReservationService; // Import reservation service
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
+import org.springframework.web.bind.annotation.*;
+import projekt.m223.projektM223.model.ReservationModel;
+import projekt.m223.projektM223.service.ReservationService;
 
 @Controller
 @RequestMapping("/reservations")
-@RequiredArgsConstructor
 public class ReservationController {
 
     @Autowired
@@ -36,7 +33,6 @@ public class ReservationController {
         return "reservation_details";
     }
 
-
     @PostMapping("/byPublicKey")
     public String getReservationByPublicKey(@RequestParam("publicCode") String publicCode, Model model) {
         ReservationModel reservation = reservationService.findByPublicCode(publicCode);
@@ -48,53 +44,38 @@ public class ReservationController {
         }
     }
 
+    @PostMapping("/byPrivateKey")
+    public String getReservationByPrivateKey(@RequestParam("privateCode") String privateCode, Model model) {
+        ReservationModel reservation = reservationService.findByPrivateCode(privateCode);
+        if (reservation != null) {
+            model.addAttribute("reservation", reservation);
+            return "edit_reservation_page";
+        } else {
+            return "error";
+        }
+    }
+
+    @GetMapping("/edit/{privateCode}")
+    public String showUpdateForm(@PathVariable("privateCode") String privateCode, Model model) {
+        ReservationModel reservation = reservationService.findByPrivateCode(privateCode);
+        if (reservation != null) {
+            model.addAttribute("reservation", reservation);
+            return "edit_reservation_page";
+        } else {
+            return "error";
+        }
+    }
 
     @PostMapping("/update/{privateCode}")
-    public String updateReservation(@PathVariable String privateCode, @ModelAttribute ReservationModel reservation, Model model) {
-        ReservationModel existingReservation = reservationService.findByPrivateCode(privateCode);
-        if (existingReservation == null) {
-            return "error_page"; // Handle invalid private code
+    public String updateReservation(@PathVariable("privateCode") String privateCode, @ModelAttribute("reservation") ReservationModel reservation, Model model) {
+        ReservationModel updatedReservation = reservationService.updateReservationByPrivateCode(privateCode, reservation);
+        if (updatedReservation != null) {
+            model.addAttribute("reservation", updatedReservation);
+            return "show_reservation_detail";
+        } else {
+            return "error";
         }
-        existingReservation.setDate(reservation.getDate());
-        existingReservation.setFrom(reservation.getFrom());
-        existingReservation.setTo(reservation.getTo());
-        existingReservation.setRoom(reservation.getRoom());
-        existingReservation.setComment(reservation.getComment());
-        existingReservation.setMemberList(reservation.getMemberList());
-        // Don't update public or private codes for security reasons
-        reservationService.saveReservation(existingReservation);
-        model.addAttribute("reservation", existingReservation);
-        return "reservation_details"; // Redirect back to reservation details page
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    @GetMapping("/{privateCode}/edit")
-    public String editReservationByPrivateCode(@PathVariable String privateCode, Model model) {
-        ReservationModel reservation = reservationService.findByPrivateCode(privateCode);
-        if (reservation == null) {
-            return "error_page"; // Handle invalid private code
-        }
-        model.addAttribute("reservation", reservation);
-        return "edit_reservation_page";
-    }
-
-
-
 
 
     private String generateRandomCode(int length) {
