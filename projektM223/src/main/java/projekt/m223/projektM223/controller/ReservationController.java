@@ -71,7 +71,7 @@ public class ReservationController {
         ReservationModel updatedReservation = reservationService.updateReservationByPrivateCode(privateCode, reservation);
         if (updatedReservation != null) {
             model.addAttribute("reservation", updatedReservation);
-            return "show_reservation_detail";
+            return "reservation_details";
         } else {
             return "error_page";
         }
