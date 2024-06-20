@@ -19,8 +19,10 @@ import java.util.Date;
 public class ReservationModel {
     @Id
     private String id;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
+
     private String from;
     private String to;
     private int room;
@@ -28,6 +30,7 @@ public class ReservationModel {
     private String memberList;
     private String publicCode;
     private String privateCode;
+
 
     public Date getDate() {
         return date;

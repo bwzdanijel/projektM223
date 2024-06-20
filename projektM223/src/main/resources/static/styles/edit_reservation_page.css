@@ -3,17 +3,12 @@ body {
     background-color: #f9f9f9;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100vh;
 }
-
-h1 {
+h1, h2 {
     text-align: center;
     color: #333;
 }
-
 form {
     background-color: #fff;
     padding: 20px;
@@ -22,32 +17,29 @@ form {
     width: 100%;
     max-width: 600px;
     box-sizing: border-box;
+    margin: auto;
 }
-
 label {
     font-weight: bold;
     margin-bottom: 5px;
     display: block;
 }
-
 table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
 }
-
 th, td {
     padding: 10px;
     border-bottom: 1px solid #ddd;
 }
-
 td:first-child {
     width: 25%;
     vertical-align: top;
 }
-
 input[type="text"],
 input[type="date"],
+input[type="number"],
 textarea,
 select {
     width: 100%;
@@ -58,7 +50,6 @@ select {
     border-radius: 4px;
     box-sizing: border-box;
 }
-
 button[type="submit"] {
     background-color: #4CAF50;
     color: white;
@@ -69,7 +60,17 @@ button[type="submit"] {
     font-size: 16px;
     transition: background-color 0.3s ease;
 }
-
 button[type="submit"]:hover {
     background-color: #45a049;
+}
+.button-group a {
+    text-decoration: none;
+    color: #4CAF50;
+    padding: 10px 20px;
+    border: 1px solid #4CAF50;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+.button-group a:hover {
+    background-color: #f9f9f9;
 }
