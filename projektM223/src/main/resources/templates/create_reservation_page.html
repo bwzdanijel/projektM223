@@ -15,7 +15,7 @@
                 <label for="date">Date:</label>
             </td>
             <td>
-                <input type="date" id="date" th:field="*{date}">
+                <input type="date" id="date" th:field="*{date}" required>
             </td>
         </tr>
         <tr>
@@ -23,7 +23,7 @@
                 <label for="from">From:</label>
             </td>
             <td>
-                <input type="text" id="from" th:field="*{from}">
+                <input type="text" id="from" th:field="*{from}" required>
             </td>
         </tr>
         <tr>
@@ -31,7 +31,7 @@
                 <label for="to">To:</label>
             </td>
             <td>
-                <input type="text" id="to" th:field="*{to}">
+                <input type="text" id="to" th:field="*{to}" required>
             </td>
         </tr>
         <tr>
@@ -39,7 +39,7 @@
                 <label for="room">Room:</label>
             </td>
             <td>
-                <select id="room" th:field="*{room}">
+                <select id="room" th:field="*{room}" required>
                     <option value="101">101</option>
                     <option value="102">102</option>
                     <option value="103">103</option>
@@ -53,7 +53,7 @@
                 <label for="comment">Comment:</label>
             </td>
             <td>
-                <textarea id="comment" th:field="*{comment}"></textarea>
+                <textarea id="comment" th:field="*{comment}" required></textarea>
             </td>
         </tr>
         <tr>
@@ -61,7 +61,7 @@
                 <label for="memberList">Member List:</label>
             </td>
             <td>
-                <textarea id="memberList" th:field="*{memberList}"></textarea>
+                <textarea id="memberList" th:field="*{memberList} " required></textarea>
             </td>
         </tr>
         </tbody>

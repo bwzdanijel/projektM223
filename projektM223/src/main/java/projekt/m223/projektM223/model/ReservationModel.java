@@ -17,7 +17,7 @@ public class ReservationModel {
     @Id
     private String id;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "dd-MM-yyyy") //yyyy-MM-dd
     private Date date;
 
     private String from;
