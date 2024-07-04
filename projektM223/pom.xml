@@ -14,7 +14,7 @@
 	<name>projektM223</name>
 	<description>Projekt fuer M223</description>
 	<properties>
-		<java.version>22</java.version>
+		<java.version>21</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -63,6 +63,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>projektM223a</finalName>
 	</build>
 
 </project>
